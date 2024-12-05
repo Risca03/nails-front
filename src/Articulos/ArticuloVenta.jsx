@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
 import {
   newArticuloVenta,
   obtenerArticuloVenta,
 } from "../Services/ArticuloVentaService";
 import { obtenerLineas2 } from "../Services/LineaService";
-import PropTypes from 'prop-types';
-MyComponent.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default function ArticuloVenta({ title }) {
   let navegacion = useNavigate();
@@ -23,7 +18,7 @@ export default function ArticuloVenta({ title }) {
 
   const [listaLineas, setListaLineas] = useState([]);
   const [selectedLinea, setSelectedLinea] = useState({});
-  const { denominacion, linea } = articulo;
+  const { denominacion } = articulo;
 
   useEffect(() => {
     cargarModel();
