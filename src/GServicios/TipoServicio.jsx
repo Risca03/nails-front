@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -29,12 +28,12 @@ export default function TipoServicio({ title }) {
     }
   };
 
-  const onInputChange = ({ target: { name, value } }) => {
+  const cambiarFormulario = ({ target: { name, value } }) => {
     //spread operator ... (expandir los atributos)
     setTipoServicio({ ...tipoServicio, [name]: value });
   };
 
-  const onSubmit = async (e) => {
+  const registrar = async (e) => {
     e.preventDefault();
     newTipoServicio(tipoServicio);
     // Redirigimos a la pagina de inicio
@@ -48,7 +47,7 @@ export default function TipoServicio({ title }) {
         <hr></hr>
       </div>
 
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form onSubmit={(e) => registrar(e)}>
         <div className="mb-3">
           <label htmlFor="denominacion" className="form-label">
             {" "}
@@ -61,7 +60,7 @@ export default function TipoServicio({ title }) {
             name="denominacion"
             required={true}
             value={denominacion}
-            onChange={(e) => onInputChange(e)}
+            onChange={(e) => cambiarFormulario(e)}
           />
         </div>
 
