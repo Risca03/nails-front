@@ -18,7 +18,7 @@ export default function Servicio({ title }) {
   const [listaClientes, setListaClientes] = useState([]);
   const [selectedCliente, setSelectedCliente] = useState("");
   //TODO: VERIFICAR EL FORMATO DE LA FECHA
-  const [fecha, setFecha] = useState(new Date().toISOString().split("T")[0]);
+  const [fecha, setFecha] = useState(new Date());
   const [tiposServicio, setTiposServicio] = useState([]);
   const [servicios, setServicios] = useState([]);
   const [total, setTotal] = useState(0); // Estado para el total
@@ -57,7 +57,7 @@ export default function Servicio({ title }) {
       const resultado = await obtenerServicio(id);
       setServicio(resultado);
       setSelectedCliente(String(resultado.cliente.id)); // Convertir a string
-      setFecha(new Date(resultado.fechaDocumento).toISOString().split("T")[0]);
+      setFecha(new Date());
       setServicios(resultado.listaItems);
     }
   };
@@ -113,12 +113,13 @@ export default function Servicio({ title }) {
 
   const registrar = async (e) => {
     e.preventDefault();
-    const fechaActual = new Date().toISOString().split("T")[0];
+    const fechaActual = new Date();
+    const fechaSeleccionada = new Date (fecha);
 
-    if (fecha > fechaActual) {
+    if ( fechaSeleccionada < fechaActual) {
       setErrores((prevErrors) => ({
         ...prevErrors,
-        fecha: "La fecha no puede ser mayor a la actual",
+        fecha: "La fecha no puede ser menor a la actual",
       }));
       return;
     } else {
@@ -161,15 +162,14 @@ export default function Servicio({ title }) {
 
     const data = {
       ...servicio,
-      fechaDocumento: fecha,
-      cliente: selectedCliente,
+      fechaDocumento: fechaSeleccionada,
+      cliente: +  selectedCliente,
       total: total,
       listaItems: servicios.map((item) => ({
         ...item,
         tipoServicioId: item.tipoServicioId,
       })),
     };
-
     await nuevoServicio(data);
     navegacion("/servicioList");
   };
