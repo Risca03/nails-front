@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../app.config.js";
+import { API_URL } from "../app.config.jsx";
 
 export async function obtenerLineasPorPagina(consulta, page, tamañoPagina) {
   const urlBase = API_URL + "/lineasPageQuery";

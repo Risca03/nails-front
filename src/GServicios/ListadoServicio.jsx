@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { IMAGEN_EDIT, IMAGEN_DELETE, ITEMS_PER_PAGE } from "../app.config.js";
+import { IMAGEN_EDIT, IMAGEN_DELETE, ITEMS_PER_PAGE } from "../app.config.jsx";
 import { ServicioContext } from "./ServicioContext";
 import {
   // eliminarServicio,
   obtenerServicios,
 } from "../Services/ServicioService";
-import { FormatearFecha } from "../utils/FormateadorDeFecha";
+import { FormatearFecha } from "../utils/FormateadorDeFechas.js";
 import { FormetearPrecio } from "../utils/FormateadorDePrecio.js";
 
 export default function ListadoServicio() {
