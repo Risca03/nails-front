@@ -69,10 +69,7 @@ export async function nuevaLinea(linea) {
 export async function eliminarLineas(id) {
   const urlBase = API_URL + "/lineaEliminar";
   try {
-    const { data } = await axios({
-      method: "DELETE",
-      url: `${urlBase}/${id}`,
-    });
+    const { data } = await axios.delete(`${urlBase}/${id}`);
     return true;
   } catch (error) {
     console.error(error);

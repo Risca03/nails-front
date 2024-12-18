@@ -44,15 +44,10 @@ export async function obtenerCliente(id) {
 }
 
 export async function nuevoCliente(cliente) {
-
-  //HACK para registrar el cliente
-  //TODO - Cambiar la fecha de inicio y fecha de nacimiento
   const dataCliente = {
     ...cliente,
-    contacto:cliente.razonSocial,
-    fechaInicio:"2024-11-20T00:00:00.000+00:00",
-    fechaNacimiento: "2024-11-20T00:00:00.000+00:00",
-    letra: "A",
+    fechaInicio: "2024-11-20",
+    fechaNacimiento: "2024-11-20",
   }
 
   try {
@@ -78,12 +73,8 @@ export async function nuevoCliente(cliente) {
 }
 
 export async function eliminarCliente(id) {
-  const urlBase = API_URL + "/clienteEliminar";
   try {
-    const { data } = await axios({
-      method: "PUT",
-      url: `${urlBase}/${id}`,
-    });
+    const { data } = await axios.delete(`${API_URL}/cliente/${id}`);
     return true;
   } catch (error) {
     console.error(error);

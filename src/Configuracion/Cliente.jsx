@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { nuevoCliente, obtenerCliente } from "../Services/ClienteService";
@@ -14,12 +13,13 @@ export default function Cliente({ title }) {
   const { id } = useParams();
 
   const [cliente, setCliente] = useState({
-    razonSocial: "",
+    nombre: "",
     celular: "",
     mail: "",
+    razonSocial: "",
   });
 
-  const { razonSocial, celular, mail } = cliente;
+  const { nombre, celular, mail } = cliente;
 
   useEffect(() => {
     cargarCliente();
@@ -60,9 +60,25 @@ export default function Cliente({ title }) {
 
       <form onSubmit={(e) => registrar(e)}>
         <div className="mb-3">
-          <label htmlFor="razonSocial" className="form-label">
+          <label htmlFor="nombre" className="form-label">
             {" "}
             Apellido Nombre
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="nombre"
+            name="nombre"
+            required={true}
+            value={cliente.nombre}
+            onChange={(e) => cambiarFormulario(e)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="razonSocial" className="form-label">
+            {" "}
+            Razon Social
           </label>
           <input
             type="text"
@@ -70,7 +86,7 @@ export default function Cliente({ title }) {
             id="razonSocial"
             name="razonSocial"
             required={true}
-            value={razonSocial}
+            value={cliente.razonSocial}
             onChange={(e) => cambiarFormulario(e)}
           />
         </div>

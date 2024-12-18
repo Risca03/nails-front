@@ -119,8 +119,16 @@ export default function ListadoCliente() {
                 </span>
               )}
             </th>
-            <th scope="col" onClick={() => filtrar("razonSocial")}>
+            <th scope="col" onClick={() => filtrar("nombre")}>
               Apellido y Nombre
+              {configuracion.key === "nombre" && (
+                <span>
+                  {configuracion.direction === "ascending" ? " 🔽" : " 🔼"}
+                </span>
+              )}
+            </th>
+            <th scope="col" onClick={() => filtrar("razonSocial")}>
+              Razón Social
               {configuracion.key === "razonSocial" && (
                 <span>
                   {configuracion.direction === "ascending" ? " 🔽" : " 🔼"}
@@ -152,6 +160,7 @@ export default function ListadoCliente() {
             listadoFiltrado().map((cliente, indice) => (
               <tr key={indice}>
                 <th scope="row">{cliente.id}</th>
+                <td>{cliente.nombre}</td>
                 <td>{cliente.razonSocial}</td>
                 <td>{cliente.celular}</td>
                 <td>{cliente.mail}</td>

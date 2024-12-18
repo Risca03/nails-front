@@ -50,7 +50,7 @@ export default function ListadoServicio() {
     setConsulta(e.target.value);
   };
 
-  const eliminar = async () => {
+  const eliminar = async (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este servicio?")) {
 
       //TODO - Implementar la eliminación del servicio
@@ -140,17 +140,17 @@ export default function ListadoServicio() {
                   )}
                 </th>
 
-                <th scope="col" onClick={() => filtrar("cliente")}>
+                <th scope="col" onClick={() => filtrar("clienteNombre")}>
                   Cliente
-                  {configuracion.key === "cliente" && (
+                  {configuracion.key === "clienteNombre" && (
                     <span>
                       {configuracion.direction === "ascending" ? " 🔽" : " 🔼"}
                     </span>
                   )}
                 </th>
-                <th scope="col" onClick={() => filtrar("fecha")}>
+                <th scope="col" onClick={() => filtrar("fechaDocumento")}>
                   Fecha
-                  {configuracion.key === "fecha" && (
+                  {configuracion.key === "fechaDocumento" && (
                     <span>
                       {configuracion.direction === "ascending" ? " 🔽" : " 🔼"}
                     </span>
@@ -162,9 +162,9 @@ export default function ListadoServicio() {
             </thead>
             <tbody>
               {listadoFiltrado().map((servicio, indice) => (
-                <tr key={indice}>
+                <tr key={servicio.id}> {/* Usar servicio.id como key */}
                   <th scope="row">{servicio.id}</th>
-                  <td>{servicio.clienteRazonSocial}</td>
+                  <td>{servicio.clienteNombre}</td> {/* Mostrar clienteNombre */}
                   <td>{FormatearFecha(servicio.fechaDocumento)}</td>
                   <td>{FormetearPrecio(servicio.total)}</td>
                   <td className="text-center">
