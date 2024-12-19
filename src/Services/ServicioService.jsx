@@ -61,7 +61,7 @@ export async function eliminarServicio(id) {
   try {
     const { data } = await axios({
       method: "DELETE",
-      url: `${API_URL}/servicioEliminar/${id}`,
+      url: `${API_URL}/servicio/${id}`,
     });
     return data;
   } catch (error) {

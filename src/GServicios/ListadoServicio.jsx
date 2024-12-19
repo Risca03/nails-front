@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { IMAGEN_EDIT, IMAGEN_DELETE, ITEMS_PER_PAGE } from "../app.config.jsx";
 import { ServicioContext } from "./ServicioContext";
 import {
-  // eliminarServicio,
+  eliminarServicio,
   obtenerServicios,
 } from "../Services/ServicioService";
 import { FormatearFecha } from "../utils/FormateadorDeFechas.js";
 import { FormetearPrecio } from "../utils/FormateadorDePrecio.js";
+import { useNavigate } from "react-router-dom";
 
 export default function ListadoServicio() {
   const { servicios, setServicios } = useContext(ServicioContext);
@@ -21,6 +22,7 @@ export default function ListadoServicio() {
   });
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     obtenerDatos();
@@ -53,18 +55,16 @@ export default function ListadoServicio() {
   const eliminar = async (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este servicio?")) {
 
-      //TODO - Implementar la eliminación del servicio
-      alert("No se puede eliminar el servicio");
-      // try {
-      //   const eliminacionExitosa = await eliminarServicio(id);
-      //   if (eliminacionExitosa) {
-      //     obtenerDatos();
-      //   } else {
-      //     console.error("Error al eliminar servicio");
-      //   }
-      // } catch (error) {
-      //   console.error("Error al eliminar la línea:", error);
-      // }
+      try {
+        const eliminacionExitosa = await eliminarServicio(id);
+        if (eliminacionExitosa) {
+          obtenerDatos();
+        } else {
+          console.error("Error al eliminar servicio");
+        }
+      } catch (error) {
+        console.error("Error al eliminar la línea:", error);
+      }
     }
   };
 
@@ -170,7 +170,7 @@ export default function ListadoServicio() {
                   <td className="text-center">
                     <div>
                       <button
-                        onClick={() => alert("No se puede editar el servicio")}
+                        onClick={() => navigate(`/servicio/${servicio.id}/`)}
                         className="btn btn-link btn-sm me-3"
                       >
                         <img
